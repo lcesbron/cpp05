@@ -1,18 +1,15 @@
 #include "Bureaucrat.hpp"
 #include <cstddef>
 
-
-Bureaucrat::Bureaucrat(void)
+Bureaucrat::Bureaucrat(void): name_("default bureaucrat name")
 {
-	this->name_ = "default bureaucrat name";
 	this->grade_ = 150;
 }
 
 Bureaucrat::Bureaucrat(std::string name, size_t grade): name_(name), grade_(grade) {}
 
-Bureaucrat::Bureaucrat(Bureaucrat const& toCopy)
+Bureaucrat::Bureaucrat(Bureaucrat const& toCopy): name_(toCopy.getName())
 {
-	this->name_ = toCopy.getName();
 	this->grade_ = toCopy.getGrade();
 }
 
@@ -20,8 +17,11 @@ Bureaucrat::~Bureaucrat(void) {}
 
 Bureaucrat&	Bureaucrat::operator=(Bureaucrat const& toCopy)
 {
-	this->name_ = toCopy.getName();
-	this->grade_ = toCopy.getGrade();
+	if (this != &toCopy)
+	{
+		this->grade_ = toCopy.getGrade();
+	}
+	return (*this);
 }
 
 std::string	Bureaucrat::getName(void) const
@@ -35,10 +35,33 @@ size_t	Bureaucrat::getGrade(void) const
 
 void	Bureaucrat::incrementGrade(size_t increment)
 {
-	if (this->grade_ + increment > LOWEST_GRADE)
+	if (increment + MAX_GRADE > this->grade_)
 	{
-		throw
+		throw Bureaucrat::GradeTooHighException();
 	}
-	this->grade_ += increment;
+	this->grade_ -= increment;
 }
-Bureaucrat::void		decrementGrade(size_t decrement);
+void	Bureaucrat::decrementGrade(size_t decrement)
+{
+	if (this->grade_ + decrement > LOWEST_GRADE)
+	{
+		throw Bureaucrat::GradeTooLowException();
+	}
+	this->grade_ += decrement;
+}
+
+const char*	Bureaucrat::GradeTooHighException::what(void) const throw()
+{
+	return ("Grade is too high.");
+}
+
+const char*	Bureaucrat::GradeTooLowException::what(void) const throw()
+{
+	return ("Grade is too low.");
+}
+
+std::ostream&	operator<<(std::ostream& os, Bureaucrat const &toPrint)
+{
+	os << toPrint.getName() << ", bureaucrat grade " << toPrint.getGrade() << ".";
+	return (os);
+}

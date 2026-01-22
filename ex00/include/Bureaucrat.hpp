@@ -13,7 +13,7 @@
 #  define LOWEST_GRADE 150
 # endif // LOWEST_GRADE
 
-class Bureaucrat: public exception
+class Bureaucrat
 {
 	private:
 		std::string const	name_;
@@ -23,11 +23,25 @@ class Bureaucrat: public exception
 		Bureaucrat(std::string name, size_t grade);
 		Bureaucrat(Bureaucrat const& toCopy);
 		~Bureaucrat(void);
+
 		Bureaucrat&	operator=(Bureaucrat const& toCopy);
+
 		std::string	getName(void) const;
 		size_t		getGrade(void) const;
+
 		void		incrementGrade(size_t increment);
 		void		decrementGrade(size_t decrement);
+
+		class		GradeTooHighException: public std::exception
+		{
+			public:
+				virtual const char*	what(void) const throw();
+		};
+		class		GradeTooLowException: public std::exception
+		{
+			public:
+				virtual const char*	what(void) const throw();
+		};
 };
 
 std::ostream&	operator<<(std::ostream& os, Bureaucrat const &toPrint);
