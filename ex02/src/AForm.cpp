@@ -4,10 +4,11 @@
 #include <cstddef>
 #include <string>
 
-AForm::AForm(void): name_("default AForm name"),
-				  signed_(false),
-				  requiredSigningGrade_(1),
-				  requiredExecuteGrade_(1)
+AForm::AForm(void):
+name_("default AForm name"),
+signed_(false),
+requiredSigningGrade_(1),
+requiredExecuteGrade_(1)
 {
 	if (this->requiredExecuteGrade_ > LOWEST_GRADE || this->requiredSigningGrade_ > LOWEST_GRADE)
 		throw GradeTooLowException();
@@ -15,10 +16,11 @@ AForm::AForm(void): name_("default AForm name"),
 		throw GradeTooHighException();
 }
 
-AForm::AForm(AForm const& toCopy): name_(toCopy.name_),
-						signed_(toCopy.signed_),
-						requiredSigningGrade_(toCopy.requiredSigningGrade_),
-						requiredExecuteGrade_(toCopy.requiredExecuteGrade_)
+AForm::AForm(AForm const& toCopy):
+name_(toCopy.name_),
+signed_(toCopy.signed_),
+requiredSigningGrade_(toCopy.requiredSigningGrade_),
+requiredExecuteGrade_(toCopy.requiredExecuteGrade_)
 {
 	if (this->requiredExecuteGrade_ > LOWEST_GRADE || this->requiredSigningGrade_ > LOWEST_GRADE)
 		throw GradeTooLowException();
@@ -26,10 +28,11 @@ AForm::AForm(AForm const& toCopy): name_(toCopy.name_),
 		throw GradeTooHighException();
 }
 
-AForm::AForm(std::string name, size_t signing, size_t execute): name_(name),
-						signed_(false),
-						requiredSigningGrade_(signing),
-						requiredExecuteGrade_(execute)
+AForm::AForm(std::string name, size_t signing, size_t execute):
+name_(name),
+signed_(false),
+requiredSigningGrade_(signing),
+requiredExecuteGrade_(execute)
 {
 	if (this->requiredExecuteGrade_ > LOWEST_GRADE || this->requiredSigningGrade_ > LOWEST_GRADE)
 		throw GradeTooLowException();
@@ -107,6 +110,18 @@ void	AForm::signAForm(Bureaucrat const& bureaucrat)
 		return ;
 	}
 	std::cout << "bureaucrat " << bureaucrat.getName() << " signed " << this->name_ << std::endl;
+}
+
+void				AForm::checkExecutable(size_t const executorGrade) const
+{
+	if (!this->getSigned())
+	{
+		throw NotSignedException();
+	}
+	if (executorGrade > this->getRequiredExecute())
+	{
+		throw GradeTooLowException();
+	}
 }
 
 std::ostream&	operator<<(std::ostream& os, AForm const& AForm)

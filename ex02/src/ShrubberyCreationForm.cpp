@@ -6,7 +6,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(void): AForm("Shrubbery creation fo
 	this->target_ = "./default_file";
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const& toCopy): AForm("Shrubbery creation form", 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const& toCopy): AForm(toCopy::AForm);
 {
 	this->target_ = toCopy.target_;
 }
@@ -28,15 +28,7 @@ void	ShrubberyCreationForm::execute(Bureaucrat const& executor) const
 {
 	std::ofstream	file;
 
-	if (!this->getSigned())
-	{
-		throw NotSignedException();
-	}
-	if (executor.getGrade() > this->getRequiredExecute())
-	{
-		throw GradeTooLowException();
-	}
-
+	this->checkExecutable(executor.getGrade());
 	file.open(this->target_.c_str());
 	if (!file.is_open())
 	{

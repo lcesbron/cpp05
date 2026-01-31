@@ -1,17 +1,10 @@
-#ifndef ROBOTOMYREQUESTFORM_HPP
-# define ROBOTOMYREQUESTFORM_HPP
+#include "RobotomyRequestForm.hpp"
+#include "AForm.hpp"
 
-# include "AForm.hpp"
+RobotomyRequestForm::RobotomyRequestForm(void):
+AForm("Robotomy Request Form", 145, 45),
+target_("default_target") {}
 
-class RobotomyRequestForm: public AForm
-{
-	private:
-
-	public:
-		RobotomyRequestForm(void);
-		RobotomyRequestForm(RobotomyRequestForm const& toCopy);
-		~RobotomyRequestForm(void);
-		RobotomyRequestForm&	operator=(RobotomyRequestForm const& toCopy);
-};
-
-#endif //ROBOTOMYREQUESTFORM_HPP
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const& toCopy);
+RobotomyRequestForm::~RobotomyRequestForm(void);
+RobotomyRequestForm&	operator=(RobotomyRequestForm const& toCopy);
