@@ -112,13 +112,13 @@ void	AForm::signAForm(Bureaucrat const& bureaucrat)
 	std::cout << "bureaucrat " << bureaucrat.getName() << " signed " << this->name_ << std::endl;
 }
 
-void				AForm::checkExecutable(size_t const executorGrade) const
+void		AForm::execute(Bureaucrat const& executor) const
 {
 	if (!this->getSigned())
 	{
 		throw NotSignedException();
 	}
-	if (executorGrade > this->getRequiredExecute())
+	if (executor.getGrade() > this->getRequiredExecute())
 	{
 		throw GradeTooLowException();
 	}

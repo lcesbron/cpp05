@@ -18,7 +18,7 @@ DEP_DIR		=		$(addprefix $(BUILD_DIR), dep/)
 
 #		SRC
 
-BASENAME	=		main Bureaucrat AForm ShrubberyCreationForm
+BASENAME	=		main Bureaucrat AForm ShrubberyCreationForm RobotomyRequestForm
 
 SRC			=		$(addprefix $(SRC_DIR), $(addsuffix .cpp, $(BASENAME)))
 OBJ			=		$(addprefix $(OBJ_DIR), $(addsuffix .o, $(BASENAME)))

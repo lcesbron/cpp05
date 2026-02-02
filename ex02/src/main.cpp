@@ -1,13 +1,28 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include <exception>
 
 int	main(void)
 {
-	ShrubberyCreationForm	scf;
+	RobotomyRequestForm	rqf;
 	Bureaucrat				boss("boss", 1);
 
-	scf.beSigned(boss);
-	scf.execute(boss);
+	rqf.beSigned(boss);
+	rqf.execute(boss);
+	rqf.execute(boss);
+	rqf.execute(boss);
+	rqf.execute(boss);
+	rqf.execute(boss);
+	rqf.execute(boss);
+	rqf.execute(boss);
+	rqf.execute(boss);
+	rqf.execute(boss);
+	rqf.execute(boss);
+	rqf.execute(boss);
+	rqf.execute(boss);
+	rqf.execute(boss);
+	rqf.execute(boss);
+	rqf.execute(boss);
 }

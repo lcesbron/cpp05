@@ -1,4 +1,5 @@
 bureaucrat
 compile_commands.json
+default_file
 .build/
 .cache/

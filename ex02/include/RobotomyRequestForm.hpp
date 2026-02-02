@@ -11,7 +11,10 @@ class RobotomyRequestForm: public AForm
 		RobotomyRequestForm(void);
 		RobotomyRequestForm(RobotomyRequestForm const& toCopy);
 		~RobotomyRequestForm(void);
+
 		RobotomyRequestForm&	operator=(RobotomyRequestForm const& toCopy);
+
+		virtual void	execute(Bureaucrat const& executor) const;
 };
 
 #endif //ROBOTOMYREQUESTFORM_HPP
