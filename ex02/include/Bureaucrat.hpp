@@ -13,6 +13,8 @@
 #  define LOWEST_GRADE 150
 # endif // LOWEST_GRADE
 
+class AForm;
+
 class Bureaucrat
 {
 	private:
@@ -32,6 +34,9 @@ class Bureaucrat
 		void		incrementGrade(size_t increment);
 		void		decrementGrade(size_t decrement);
 
+		void		signForm(AForm& toSign) const;
+		void		executeForm(AForm const& toExecute) const;
+
 		class		GradeTooHighException: public std::exception
 		{
 			public:
@@ -45,5 +50,7 @@ class Bureaucrat
 };
 
 std::ostream&	operator<<(std::ostream& os, Bureaucrat const &toPrint);
+
+# include "AForm.hpp"
 
 #endif //BUREAUCRAT_HPP

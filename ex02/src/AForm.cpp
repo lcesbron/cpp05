@@ -83,7 +83,7 @@ const char*	AForm::GradeTooLowException::what(void) const throw()
 
 const char*	AForm::NotSignedException::what(void) const throw()
 {
-	return ("Form isn't signed");
+	return ("Form isn't signed.");
 }
 
 void	AForm::beSigned(Bureaucrat const& bureaucrat)
@@ -96,20 +96,6 @@ void	AForm::beSigned(Bureaucrat const& bureaucrat)
 	{
 		throw AForm::GradeTooLowException();
 	}
-}
-
-void	AForm::signAForm(Bureaucrat const& bureaucrat)
-{
-	try
-	{
-		beSigned(bureaucrat);
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "bureaucrat " << bureaucrat.getName() << " tried to sign " << this->name_ << " but couldn't because " << bureaucrat.getGrade() << " > " << this->requiredSigningGrade_ << std::endl;
-		return ;
-	}
-	std::cout << "bureaucrat " << bureaucrat.getName() << " signed " << this->name_ << std::endl;
 }
 
 void		AForm::execute(Bureaucrat const& executor) const

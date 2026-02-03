@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
 #include <cstddef>
+#include <exception>
 
 Bureaucrat::Bureaucrat(void): name_("default bureaucrat name")
 {
@@ -48,6 +49,34 @@ void	Bureaucrat::decrementGrade(size_t decrement)
 		throw Bureaucrat::GradeTooLowException();
 	}
 	this->grade_ += decrement;
+}
+
+void		Bureaucrat::signForm(AForm& toSign) const
+{
+	try
+	{
+		toSign.beSigned(*this);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << this->name_ << " couldn't sign " << toSign.getName() << " because his grade is too low." << std::endl;
+		return ;
+	}
+	std::cout << this->name_ << " signed " << toSign.getName() << std::endl;
+}
+
+void		Bureaucrat::executeForm(AForm const& toExecute) const
+{
+	try
+	{
+		toExecute.execute(*this);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << this->getName() << " couldn't execute form " << toExecute.getName() << " because " << e.what() << std::endl;
+		return ;
+	}
+	std::cout << this->getName() << " executeded form " << toExecute.getName() << std::endl;
 }
 
 const char*	Bureaucrat::GradeTooHighException::what(void) const throw()

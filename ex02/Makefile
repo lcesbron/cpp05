@@ -3,7 +3,7 @@ NAME	=			bureaucrat
 #		UTILS
 
 CXX			=		c++
-CXXFLAGS	=		-Wall -Wextra -Wshadow  -Werror -std=c++98
+CXXFLAGS	=		-Wall -Wextra -Wshadow  -Werror -std=c++98 -g3
 CPPFLAGS	=		$(addprefix -I, $(INCLUDE_DIR)) -MD -MP -MF
 
 RM			=		rm -rf
@@ -18,7 +18,7 @@ DEP_DIR		=		$(addprefix $(BUILD_DIR), dep/)
 
 #		SRC
 
-BASENAME	=		main Bureaucrat AForm ShrubberyCreationForm RobotomyRequestForm
+BASENAME	=		main Bureaucrat AForm ShrubberyCreationForm RobotomyRequestForm PresidentialPardonForm
 
 SRC			=		$(addprefix $(SRC_DIR), $(addsuffix .cpp, $(BASENAME)))
 OBJ			=		$(addprefix $(OBJ_DIR), $(addsuffix .o, $(BASENAME)))

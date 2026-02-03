@@ -29,7 +29,6 @@ class AForm
 		size_t const&		getRequiredExecute(void) const;
 
 		void				beSigned(Bureaucrat const& bureaucrat);
-		void				signAForm(Bureaucrat const& bureaucrat);
 		void				checkExecutable(size_t const executorGrade) const;
 		virtual void		execute(Bureaucrat const& executor) const = 0;
 
