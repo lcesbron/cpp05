@@ -1,4 +1,3 @@
-#include "Bureaucrat.hpp"
 #include "Form.hpp"
 #include <exception>
 
@@ -109,7 +108,7 @@ static void	testFormSigningSuccess(void)
 	std::cout << taxForm << std::endl;
 	std::cout << director << std::endl;
 
-	taxForm.signForm(director);
+	director.signForm(taxForm);
 
 	std::cout << "After signing:" << std::endl;
 	std::cout << taxForm << std::endl;
@@ -127,8 +126,7 @@ static void	testFormSigningFailure(void)
 	std::cout << taxForm << std::endl;
 	std::cout << intern << std::endl;
 
-	// Using signForm (handles exception internally and prints message)
-	taxForm.signForm(intern);
+	intern.signForm(taxForm);
 
 	std::cout << "After failed attempt:" << std::endl;
 	std::cout << taxForm << std::endl;
@@ -165,6 +163,29 @@ static void	testFormPrintOperator(void)
 	std::cout << form << std::endl;
 }
 
+static void	testBureaucratSignForm(void)
+{
+	std::cout << "=== Test Bureaucrat::signForm ===" << std::endl;
+
+	Form		easyForm("EasyForm", 100, 100);
+	Form		hardForm("HardForm", 1, 1);
+	Bureaucrat	bob("Bob", 50);
+
+	std::cout << bob << std::endl;
+	std::cout << easyForm << std::endl;
+	std::cout << hardForm << std::endl;
+
+	// Success: Bob (grade 50) signs EasyForm (requires 100)
+	std::cout << "Bob tries to sign EasyForm (should succeed):" << std::endl;
+	bob.signForm(easyForm);
+
+	// Failure: Bob (grade 50) signs HardForm (requires 1)
+	std::cout << "Bob tries to sign HardForm (should fail):" << std::endl;
+	bob.signForm(hardForm);
+
+	std::cout << std::endl;
+}
+
 // ============== COMBINED TESTS ==============
 
 static void	testBureaucratPromotionAndSigning(void)
@@ -180,7 +201,7 @@ static void	testBureaucratPromotionAndSigning(void)
 
 	// Try to sign with insufficient grade
 	std::cout << "Attempt 1 (grade 5):" << std::endl;
-	importantForm.signForm(employee);
+	employee.signForm(importantForm);
 
 	// Promote the employee
 	std::cout << "Promoting employee..." << std::endl;
@@ -189,7 +210,7 @@ static void	testBureaucratPromotionAndSigning(void)
 
 	// Try again
 	std::cout << "Attempt 2 (grade 1):" << std::endl;
-	importantForm.signForm(employee);
+	employee.signForm(importantForm);
 
 	std::cout << "Final state:" << std::endl;
 	std::cout << importantForm << std::endl;
@@ -212,6 +233,9 @@ int	main(void)
 	testFormSigningFailure();
 	testFormBeSignedException();
 	testFormPrintOperator();
+
+	// Bureaucrat::signForm test
+	testBureaucratSignForm();
 
 	// Combined tests
 	testBureaucratPromotionAndSigning();

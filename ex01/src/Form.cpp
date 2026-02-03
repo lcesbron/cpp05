@@ -90,20 +90,6 @@ void	Form::beSigned(Bureaucrat const& bureaucrat)
 	}
 }
 
-void	Form::signForm(Bureaucrat const& bureaucrat)
-{
-	try
-	{
-		beSigned(bureaucrat);
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "bureaucrat " << bureaucrat.getName() << " tried to sign " << this->name_ << " but couldn't because " << bureaucrat.getGrade() << " > " << this->requiredSigningGrade_ << std::endl;
-		return ;
-	}
-	std::cout << "bureaucrat " << bureaucrat.getName() << " signed " << this->name_ << std::endl;
-}
-
 std::ostream&	operator<<(std::ostream& os, Form const& form)
 {
 	os << "Form name : " << form.getName() << std::endl;
