@@ -5,7 +5,7 @@
 #include <iostream>
 
 RobotomyRequestForm::RobotomyRequestForm(void):
-AForm("Robotomy Request Form", 145, 45),
+AForm("Robotomy Request Form", 72, 45),
 target_("default_target")
 {
 	std::srand(std::time(0));
@@ -19,7 +19,7 @@ target_(toCopy.target_)
 }
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target):
-AForm("Robotomy Request Form", 145, 45),
+AForm("Robotomy Request Form", 72, 45),
 target_(target)
 {
 	std::srand(std::time(0));

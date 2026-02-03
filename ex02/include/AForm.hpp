@@ -19,7 +19,7 @@ class AForm
 		AForm(void);
 		AForm(std::string name, size_t signing, size_t execute);
 		AForm(AForm const& toCopy);
-		~AForm(void);
+		virtual ~AForm(void);
 
 		AForm&	operator=(AForm const& toCopy);
 
