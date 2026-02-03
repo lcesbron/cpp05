@@ -40,9 +40,32 @@ static void	testPrintOperator(void)
 	std::cout << bob << std::endl;
 }
 
+static void	testCreateImpossible(void)
+{
+	try
+	{
+		Bureaucrat fred("fred", 0);
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "couldnt create bureaucrat" << std::endl;
+	}
+	try
+	{
+		Bureaucrat fred("fred", 151);
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "couldnt create bureaucrat" << std::endl;
+	}
+}
+
 int	main(void)
 {
 	testIncrementGrade();
 	testDecrementGrade();
 	testPrintOperator();
+	testCreateImpossible();
 }

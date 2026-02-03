@@ -4,14 +4,24 @@
 
 Bureaucrat::Bureaucrat(void): name_("default bureaucrat name")
 {
-	this->grade_ = 150;
+	this->grade_ = LOWEST_GRADE;
 }
 
-Bureaucrat::Bureaucrat(std::string name, size_t grade): name_(name), grade_(grade) {}
+Bureaucrat::Bureaucrat(std::string name, size_t grade): name_(name), grade_(grade)
+{
+	if (grade > LOWEST_GRADE)
+		throw GradeTooLowException();
+	if (grade < MAX_GRADE)
+		throw GradeTooHighException();
+}
 
 Bureaucrat::Bureaucrat(Bureaucrat const& toCopy): name_(toCopy.getName())
 {
 	this->grade_ = toCopy.getGrade();
+	if (this->grade_ > LOWEST_GRADE)
+		throw GradeTooLowException();
+	if (this->grade_ < MAX_GRADE)
+		throw GradeTooHighException();
 }
 
 Bureaucrat::~Bureaucrat(void) {}
@@ -21,6 +31,10 @@ Bureaucrat&	Bureaucrat::operator=(Bureaucrat const& toCopy)
 	if (this != &toCopy)
 	{
 		this->grade_ = toCopy.getGrade();
+		if (this->grade_ > LOWEST_GRADE)
+			throw GradeTooLowException();
+		if (this->grade_ < MAX_GRADE)
+			throw GradeTooHighException();
 	}
 	return (*this);
 }
