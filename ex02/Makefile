@@ -3,7 +3,7 @@ NAME	=			bureaucrat
 #		UTILS
 
 CXX			=		c++
-CXXFLAGS	=		-Wall -Wextra -Wshadow  -Werror -std=c++98 -g3
+CXXFLAGS	=		-Wall -Wextra -Wshadow  -Werror -std=c++98
 CPPFLAGS	=		$(addprefix -I, $(INCLUDE_DIR)) -MD -MP -MF
 
 RM			=		rm -rf
